@@ -8,7 +8,9 @@ def product_create_view(request):
 	if request.method == "POST":
 		my_form = RawProductForm(request.POST)
 		if my_form.is_valid():
-			print(my_form.cleaned_data)
+			print(my_form.cleaned_data) # this cleaned data is a dictionary
+			Product.objects.create(**my_form.cleaned_data)
+			my_form = RawProductForm()
 		else:
 			print(my_form.errors)		
 	context = {
